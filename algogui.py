@@ -3,12 +3,13 @@ from tkinter import *
 import timeit
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import random
 
 
 def bubble_sorts():
     inparray = textfield_label.get()
+    print(inparray)
     numbers_list = inparray.split(",")  # splitting the numbers with ","
     tobe_sorted = []
     for data in numbers_list:  # Converting the list of string to integers to perform sorting on them
@@ -854,10 +855,51 @@ def graph_display():
     canvas.draw()
 
 
+def graphs_display():
+    bubble = bubble_sorts()
+    insertion = insertion_sorts()
+    selection = selection_sorts()
+    merge = mergesort_help()
+    heap = heapsort_help()
+    quick = quicksort_help()
+    quick_3 = quicksort3_help()
+
+    algorithms = ["Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Heap Sort", "Quick Sort",
+                  "3 Median Quick Sort"]
+    runtimes = [bubble, insertion, selection, merge, heap, quick, quick_3]
+
+    plt.bar(algorithms, runtimes)
+    plt.title("Runtime Comparison")
+    plt.xlabel("Algorithms")
+    plt.ylabel("Runtime")
+    plt.show()
+    fig = Figure(figsize=(10, 14), dpi=60)
+    a = fig.add_subplot(111)
+    a.bar(algorithms, runtimes)
+    a.set_title("Runtime Comparison")
+    a.set_ylabel("Runtime")
+    a.set_xlabel("Algorithms")
+    a.set_xticklabels(algorithms, rotation=45)
+    canvas = FigureCanvasTkAgg(fig, master=graphs_window)
+    canvas.get_tk_widget().place(x=50, y=150)
+    canvas.draw()
+
+
+def randomornot():
+    global ran_window
+    window.destroy()
+    ran_window = Tk()
+    ran_window.geometry("600x600")
+    ran_window.config(bg="black")
+    ran_window.title("Graph Comparison")
+    Button(ran_window, text="Use Random 10 value array", wraplength=200, command=graph_ran).place(x=100, y=250, width=150, height=50)
+    Button(ran_window, text="Give User Input", command=graph).place(x=350, y=250, width=150, height=50)
+
+
 def graph():
     global textfield_label, actual_array, runtime, result, results, graph_window
     textfield_label = StringVar()
-    window.destroy()
+    ran_window.destroy()
     graph_window = Tk()
     graph_window.geometry("1000x1000")
     graph_window.config(bg="black")
@@ -884,6 +926,42 @@ def graph():
     actual_arrays.place(x=0, y=150)
 
 
+def graph_ran():
+    global textfield_label, actual_array, runtime, result, results, graphs_window
+    textfield_label = StringVar()
+    ran_window.destroy()
+    graphs_window = Tk()
+    graphs_window.geometry("1000x1000")
+    graphs_window.config(bg="black")
+    graphs_window.title("Graph")
+    Button(graphs_window, text="<", bg="black", foreground="white", font=("Arial", 15), border=0,
+           command=lambda: goback(graphs_window)).place(x=0, y=0, width=30)
+    Label(graphs_window, text="Algorithm Comparison", bg="black", foreground="white", font=("Arial", 20)).pack()
+    numbers = []
+    for value in range(0, 10):
+        numbers.append(str(random.randint(0, 100)))
+
+    str_num = ",".join(numbers)
+    print(str_num)
+    textfield_label = Entry(graphs_window, bg="black", foreground="white", border=0,
+                            insertbackground="white")
+    textfield_label.insert(END, str_num)
+    textfield_label.focus()
+    Label(graphs_window, text=str_num, bg="black", foreground="white", font=("Arial",10)).pack()
+    search = Button(graphs_window, text="Run", command=graphs_display).pack()
+    print(search)
+    textfield_label.place(x=275, y=250, height=20, width=150)
+    result = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
+    result.place(x=200, y=250)
+    runtime = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
+    runtime.place(x=200, y=350)
+    results = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
+    results.place(x=200, y=450)
+    actual_array = tkinter.Canvas(bg='black', width='800', height='500', highlightthickness=0)
+    actual_array.place(x=0, y=150)
+    actual_arrays = tkinter.Canvas(bg='black', width='800', height='800', highlightthickness=0)
+    actual_arrays.place(x=0, y=150)
+
 
 if __name__ == "__main__":
     def mainwindow():
@@ -900,6 +978,6 @@ if __name__ == "__main__":
         heap_sort = Button(window, text="Heap Sort", command=heap_sort_window, bg="white", borderwidth=2).place(x=200, y=300, height=50, width=150)
         quick_sort = Button(window, text="Quick Sort", command=quick_sort_window, bg="white", borderwidth=2).place(x=500, y=300, height=50, width=150)
         median3_quicksort = Button(window, text="3 Median Quick Sort", command=quick3_sort_window, bg="white", borderwidth=2).place(x=200, y=400, height=50, width=150)
-        graphs = Button(window, text="Graph Comparison", command=graph, bg="white", borderwidth=2).place(x=500, y=400, height=50, width=150)
+        graphs = Button(window, text="Graph Comparison", command=randomornot, bg="white", borderwidth=2).place(x=500, y=400, height=50, width=150)
         window.mainloop()
     mainwindow()
