@@ -4,5 +4,7 @@
 2. Libraries used in this application tkinter, timeit, matplotlib, random
 3. Execution is only shown for bubble sort, insertion sort and selection sort.
 4. you can start running the program and the gui is self explanatory.
+5. Run the algogui.py to run the actual gui
+6. Other files contain the sorting algorithm separately
 
 ************************************
