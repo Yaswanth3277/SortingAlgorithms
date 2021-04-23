@@ -24,7 +24,7 @@ def bubble_sorts():
     elapsed = timeit.default_timer() - start_time
     print(elapsed)
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
-    result.create_text(100, 80, text=tobe_sorted, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=tobe_sorted, font='Arial 20', fill='white')
     return elapsed
 
 
@@ -45,8 +45,9 @@ def insertion_sorts():
         tobe_sorted[index+1] = temp
     elapsed = timeit.default_timer() - start_time
     print(elapsed)
+    print(tobe_sorted)
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
-    result.create_text(100, 80, text=tobe_sorted, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=tobe_sorted, font='Arial 20', fill='white')
     return elapsed
 
 
@@ -71,7 +72,7 @@ def selection_sorts():
     elapsed = timeit.default_timer() - start_time
     print(elapsed)
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
-    result.create_text(100, 80, text=tobe_sorted, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=tobe_sorted, font='Arial 20', fill='white')
     return elapsed
 
 
@@ -175,6 +176,8 @@ def quick_sorts_3(tobe_sorted, low, high):
 
 
 def partitions3(tobe_sorted, low, high):
+    global sortted
+    started_time = timeit.default_timer()
     mid = (len(tobe_sorted)-1) // 2
     medians = [low, mid, high]
     for value in range(len(tobe_sorted)):
@@ -188,6 +191,7 @@ def partitions3(tobe_sorted, low, high):
     tobe_sorted[medians[1]] = tobe_sorted[high]
     tobe_sorted[high] = temp
     print(medians, tobe_sorted, pivot)
+    sortted = timeit.default_timer() - started_time
     i = low-1
 
     for j in range(low, high):
@@ -322,11 +326,11 @@ def mergesort(tobesorted):
     x = 50
     y = 50
     for y in range(len(left_list)):
-        results.create_text(x, y, text=left_list, font='Arial 20', fill='white')
+        results.create_text(x, y, text="", font='Arial 20', fill='white')
         y = y + 30
     x = x+250
     for y in range(len(right_list)):
-        results.create_text(x, y, text=right_list, font='Arial 20', fill='white')
+        results.create_text(x, y, text="", font='Arial 20', fill='white')
 
     left_list = mergesort(left_list)
     right_list = mergesort(right_list)
@@ -508,7 +512,7 @@ def mergesort_help():
     start_time = timeit.default_timer()
     sorted_array = merge_sorts(tobe_sorted)
     elapsed = timeit.default_timer() - start_time
-    result.create_text(100, 80, text=sorted_array, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=sorted_array, font='Arial 20', fill='white')
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
     mergesort(tobesorted)
     return elapsed
@@ -531,7 +535,7 @@ def heapsort_help():
     start_time = timeit.default_timer()
     sorted_array = heap_sorts(tobe_sorted)
     elapsed = timeit.default_timer() - start_time
-    result.create_text(100, 80, text=sorted_array, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=sorted_array, font='Arial 20', fill='white')
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
     heapsort(tobesorted)
     return elapsed
@@ -555,7 +559,7 @@ def quicksort_help():
     start_time = timeit.default_timer()
     sorted_array = quick_sorts(tobe_sorted, 0, len(tobesorted)-1)
     elapsed = timeit.default_timer() - start_time
-    result.create_text(100, 80, text=sorted_array, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=sorted_array, font='Arial 20', fill='white')
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
     quicksort(tobesorted, 0, len(tobesorted)-1)
     return elapsed
@@ -578,7 +582,7 @@ def quicksort3_help():
     start_time = timeit.default_timer()
     sorted_array = quick_sorts_3(tobe_sorted, 0, len(tobesorted) - 1)
     elapsed = timeit.default_timer() - start_time
-    result.create_text(100, 80, text=sorted_array, font='Arial 20', fill='white')
+    result.create_text(200, 80, text=sorted_array, font='Arial 20', fill='white')
     runtime.create_text(200, 80, text=elapsed, font='Arial 20', fill='white')
     quicksort3(tobesorted, 0, len(tobesorted)-1)
     return elapsed
@@ -717,7 +721,7 @@ def merge_sort_window():
     Label(merge_window, text="Runtime", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=370)
     runtime = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     runtime.place(x=200, y=350)
-    Label(merge_window, text="Execution", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
+    Label(merge_window, text="", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
     results = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     results.place(x=200, y=450)
     mainloop()
@@ -751,7 +755,7 @@ def heap_sort_window():
     Label(heap_window, text="Runtime", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=370)
     runtime = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     runtime.place(x=200, y=350)
-    Label(heap_window, text="Execution", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
+    Label(heap_window, text="", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
     results = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     results.place(x=200, y=450)
     mainloop()
@@ -785,7 +789,7 @@ def quick_sort_window():
     Label(quick_window, text="Runtime", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=370)
     runtime = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     runtime.place(x=200, y=350)
-    Label(quick_window, text="Execution", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
+    Label(quick_window, text="", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
     results = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     results.place(x=200, y=450)
     mainloop()
@@ -819,7 +823,7 @@ def quick3_sort_window():
     Label(quick3_window, text="Runtime", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=370)
     runtime = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     runtime.place(x=200, y=350)
-    Label(quick3_window, text="Execution", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
+    Label(quick3_window, text="", font=("Arial", 15), bg="black", foreground="white").place(x=100, y=470)
     results = tkinter.Canvas(bg='black', width='800', height='100', highlightthickness=0)
     results.place(x=200, y=450)
     mainloop()
