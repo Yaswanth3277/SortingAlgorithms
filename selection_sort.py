@@ -2,8 +2,8 @@ def selection_sort(tobesorted):
     for values in range(len(tobesorted)):
         initial_value = values
         min = values
-        for values in range(values,len(tobesorted)):
-            if tobesorted[values]<tobesorted[min]:
+        for values in range(values, len(tobesorted)):
+            if tobesorted[values] < tobesorted[min]:
                 min = values
 
         temp = tobesorted[initial_value]
